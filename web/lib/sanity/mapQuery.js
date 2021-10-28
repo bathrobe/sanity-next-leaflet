@@ -1,7 +1,7 @@
 import groq from "groq";
 
-export const homeQuery = groq`
-  *[_type == "post"] | order(publishedAt desc){
+export const mapQuery = groq`
+  *[_type == "post"] {
     _id,
     title,
     location,

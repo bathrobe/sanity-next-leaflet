@@ -1,18 +1,33 @@
 import Link from "next/link";
 import { client } from "../lib/sanity/client";
 import { homeQuery } from "../lib/sanity/homeQuery";
+import dynamic from "next/dynamic"
 export default function Home({ posts }) {
+  const MapWithNoSSR = dynamic(()=>import("../component/Map"), {ssr:false})
+  const formatDate = (pubDate) => {
+    let d = new Date(pubDate)
+    return d.toLocaleString('en-US')
+  } 
   return (
     <div>
       <main>
-        <h1>My Blog</h1>
-        <hr />
-        <ul>
+        <header className="flex justify-evenly items-center pb-24 my-4">
+        <h1 className="text-2xl font-semibold text-blue-500 text-center">My 🌎Globetrotting🌍 Blog</h1>
+        <h2 className="text-lg font-medium text-blue-800 text-center hover:underline"><Link href="/map"><a >🗺️See Everywhere I've Been🗺️➡️</a></Link></h2>
+        </header>
+        
+        <ul className="max-w-3xl mx-auto">
           {posts.map((p) => (
             <li key={p._id}>
-              <Link href={`/posts/${p.slug}`}>
-                <a>{p.title}</a>
-              </Link>
+            <div className="flex justify-between py-8">
+              <div id="map" style={{height: "300px", width: "400px"}}>
+                <MapWithNoSSR lat={p.location.lat} long={p.location.lng} />
+              </div>
+              <div className="">
+                <Link href={`/posts/${p.slug}`}>
+                  <a className="text-3xl font-bold text-left tracking-tight">{p.title}</a>
+                </Link>
+                <p className="my-4 text-lg text-gray-700">{formatDate(p.publishedAt)}</p></div></div>
             </li>
           ))}
         </ul>

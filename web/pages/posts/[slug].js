@@ -8,14 +8,14 @@ import { postQuery } from "../../lib/sanity/postQuery";
 export default function Post({ post }) {
   return (
     <>
-      <h1>{post?.title}</h1>
-      <p>{post?.publishedAt}</p>
+      <h1 className="text-2xl font-semibold text-blue-500 text-center">{post?.title}</h1>
       <hr />
-      <img src={urlFor(post?.mainImage).width(300)} />
+      <img className="mx-auto py-8" src={urlFor(post?.mainImage).width(300)} />
+      <div className="text-center">
       <BlockContent blocks={post?.body} />
       <Link href="/">
-        <a>Back home</a>
-      </Link>
+        <a className="text-semibold">Back home</a>
+      </Link></div>
     </>
   );
 }

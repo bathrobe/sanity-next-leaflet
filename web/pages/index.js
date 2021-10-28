@@ -13,7 +13,7 @@ export default function Home({ posts }) {
       <main>
         <header className="flex justify-evenly items-center pb-24 my-4">
         <h1 className="text-2xl font-semibold text-blue-500 text-center">My 🌎Globetrotting🌍 Blog</h1>
-        <h2 className="text-lg font-medium text-blue-800 text-center hover:underline"><Link href="/map"><a >🗺️See Everywhere I've Been🗺️➡️</a></Link></h2>
+        <h2 className="text-lg font-medium text-blue-800 text-center hover:underline"><Link href="/map"><a >🗺️See Where I've Been🗺️➡️</a></Link></h2>
         </header>
         
         <ul className="max-w-3xl mx-auto">

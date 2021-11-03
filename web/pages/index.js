@@ -6,7 +6,7 @@ import dynamic from "next/dynamic"
 
 export default function Home({ posts }) {
   //here's how we import the Map component without SSR, so Next can display it
-  const MapWithNoSSR = dynamic(()=>import("../component/Map"), {ssr:false})
+  const MapWithNoSSR = dynamic(()=>import("../components/Map"), {ssr:false})
   //little function to help display formatted dates
   const formatDate = (pubDate) => {
     let d = new Date(pubDate)

@@ -3,7 +3,7 @@ import { client } from "../lib/sanity/client";
 import { mapQuery } from "../lib/sanity/mapQuery";
 import dynamic from "next/dynamic"
 export default function Map({ geomap }) {
-  const MapWithNoSSR = dynamic(()=>import("../component/Map"), {ssr:false})
+  const MapWithNoSSR = dynamic(()=>import("../components/Map"), {ssr:false})
   return (
     <div>
       <main>

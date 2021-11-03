@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { client } from "../lib/sanity/client";
 import { homeQuery } from "../lib/sanity/homeQuery";
+//this library will let leaflet work its magic
 import dynamic from "next/dynamic"
+
 export default function Home({ posts }) {
+  //here's how we import the Map component without SSR, so Next can display it
   const MapWithNoSSR = dynamic(()=>import("../component/Map"), {ssr:false})
+  //little function to help display formatted dates
   const formatDate = (pubDate) => {
     let d = new Date(pubDate)
     return d.toLocaleString('en-US')
@@ -17,10 +21,12 @@ export default function Home({ posts }) {
         </header>
         
         <ul className="max-w-3xl mx-auto">
+          {/* here we map the posts out in cards */}
           {posts.map((p) => (
             <li key={p._id}>
             <div className="flex justify-between py-8">
               <div id="map" style={{height: "300px", width: "400px"}}>
+                {/* each post's latitude and longitude are passed from Sanity's geopoint input to react-leaflet */}
                 <MapWithNoSSR lat={p.location.lat} long={p.location.lng} />
               </div>
               <div className="">
@@ -37,6 +43,7 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps({ params }) {
+  //take a look at the homeQuery in the lib folder to see how the locations are retrieved in GROQ
   const posts = await client.fetch(homeQuery);
 
   return {
